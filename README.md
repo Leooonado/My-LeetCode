@@ -28,7 +28,7 @@ by **analytics use cases**, similar to real-world data analysis tasks.
 - Business Logic Translation
 - Edge Case Handling
 
-### R for Analytics
+### R for Analytics (There are not that much R problems at LeetCode, might use R for other personal project)
 - Data Wrangling with dplyr
 - Grouped Summaries
 - Pipeline-style Transformations
