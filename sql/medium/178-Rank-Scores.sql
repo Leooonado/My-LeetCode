@@ -87,6 +87,11 @@ s2.score：整张 Scores 表里的所有分数
 WHERE s2.score > s1.score：只看 比当前这行分数更高的
 DISTINCT：同分只算一次（否则会跳号）
 COUNT(...)：数一数有多少个
+
+ Key Points:
+- Ranking is based on the number of distinct scores higher than the current score.
+- Table aliases (s1, s2) allow the same table to be referenced multiple times.
+- This approach simulates DENSE_RANK without using window functions.
   
 """
 
