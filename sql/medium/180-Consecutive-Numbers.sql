@@ -71,3 +71,21 @@ JOIN Logs l2 ON l2.id = l1.id + 1
 JOIN Logs l3 ON l3.id = l1.id + 2
 WHERE l1.num = l2.num
   AND l2.num = l3.num;
+
+"""
+log a "faster" solution based on editorial
+The logic is similar, just the way it's written is a little bit different
+However, write Join...On... Obviously might be better. 
+"""
+SELECT DISTINCT
+    l1.Num AS ConsecutiveNums
+FROM
+    Logs l1,
+    Logs l2,
+    Logs l3
+WHERE
+    l1.Id = l2.Id - 1
+    AND l2.Id = l3.Id - 1
+    AND l1.Num = l2.Num
+    AND l2.Num = l3.Num
+;
