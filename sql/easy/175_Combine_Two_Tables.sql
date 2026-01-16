@@ -81,3 +81,23 @@ Select Person.firstName, Person.lastName, Address.city, Address.state
     from Person
     Left join Address
     On Person.personId = Address.personId;
+
+"""
+Tried agian
+summary:
+确认哪个是主表哪个是附表
+如果加入的无信息就会变成null
+ LEFT JOIN：保证所有 Person 都出现
+没有 Address 的人 → city/state = NULL
+join 的是 表 Address a
+列只出现在 SELECT 或 ON
+- JOIN connects tables, not columns.
+- Use LEFT JOIN when rows from the main table must be preserved.
+- Select columns only after defining correct table relationships.
+1. 确认主表 2.Adress是附加信息 3.链接条件
+只有Join 或者是Join...on...
+"""
+SELECT p.firstName, p.lastName, a.city, a.state
+FROM Person p
+LEFT JOIN Address a
+  ON p.personId = a.personId;
