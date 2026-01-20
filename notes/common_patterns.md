@@ -52,7 +52,7 @@ JOIN conditions almost always follow this pattern:
 ```sql
 tableA.id = tableB.foreignKey
 
-
+```
 ---
 
 ##Examples:
@@ -63,7 +63,8 @@ e.managerId = m.id
 e.departmentId = d.id
 
 
-```md
+```
+
 ###3. Common JOIN Patterns (with Examples)
 #Pattern 1: Enriching a main table (LEFT JOIN)
 
@@ -77,7 +78,8 @@ FROM Person p
 LEFT JOIN Address a
   ON p.personId = a.personId
 
-```md
+```
+
 Key idea:
 - Person must always appear
 - Address may be NULL
@@ -94,7 +96,8 @@ FROM Employee e
 JOIN Employee m
   ON e.managerId = m.id
 
-```md
+```
+
 Key idea:
 
 - Same table, different roles
@@ -128,7 +131,8 @@ Controls how rows match	Controls which rows stay
 LEFT JOIN Address a
 WHERE a.city = 'NY'
 
-```md
+```
+
 This turns the LEFT JOIN into an INNER JOIN.
 
 Correct version:
@@ -137,7 +141,8 @@ LEFT JOIN Address a
   ON p.personId = a.personId
  AND a.city = 'NY'
 
-```md
+```
+
 ---
 ###5. A Universal SQL JOIN Template
 
@@ -154,7 +159,8 @@ LEFT / INNER JOIN (
 WHERE
   -- business filters only
 
-```md
+```
+
 ---
 ###6. Interview-Oriented Takeaways
 
