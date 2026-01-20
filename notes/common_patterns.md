@@ -53,52 +53,52 @@ JOIN conditions almost always follow this pattern:
 tableA.id = tableB.foreignKey
 
 
-Examples:
+---
 
+##Examples:
+
+```sql
 p.personId = a.personId
-
 e.managerId = m.id
-
 e.departmentId = d.id
 
-3. Common JOIN Patterns (with Examples)
-Pattern 1: Enriching a main table (LEFT JOIN)
+
+###3. Common JOIN Patterns (with Examples)
+#Pattern 1: Enriching a main table (LEFT JOIN)
 
 Problem type:
 “Show all entities, even if related data is missing.”
 
-Example: Combine Person and Address
+- Example: Combine Person and Address
 
+```sql
 FROM Person p
 LEFT JOIN Address a
   ON p.personId = a.personId
 
 
 Key idea:
+- Person must always appear
+- Address may be NULL
 
-Person must always appear
-
-Address may be NULL
-
-Pattern 2: Self Join (table plays two roles)
+#Pattern 2: Self Join (table plays two roles)
 
 Problem type:
 “Compare rows within the same table.”
 
-Example: Employees earning more than their managers
+- Example: Employees earning more than their managers
 
+```sql
 FROM Employee e
 JOIN Employee m
   ON e.managerId = m.id
 
-
 Key idea:
 
-Same table, different roles
+- Same table, different roles
+- Use aliases to distinguish roles
 
-Use aliases to distinguish roles
-
-Pattern 3: Group-level metric + join back
+#Pattern 3: Group-level metric + join back
 
 Problem type:
 “Highest / lowest / top N per group.”
@@ -112,18 +112,17 @@ Employee
 
 
 Key idea:
+- Aggregation alone loses row detail
 
-Aggregation alone loses row detail
+- Join back restores employee-level rows
 
-Join back restores employee-level rows
-
-4. JOIN vs WHERE: Division of Responsibility
+###4. JOIN vs WHERE: Division of Responsibility
 ON clause	WHERE clause
 Defines table relationships	Filters final results
 Controls how rows match	Controls which rows stay
 
 ⚠️ Common pitfall:
-
+```sql
 LEFT JOIN Address a
 WHERE a.city = 'NY'
 
@@ -131,12 +130,15 @@ WHERE a.city = 'NY'
 This turns the LEFT JOIN into an INNER JOIN.
 
 Correct version:
-
+```sql
 LEFT JOIN Address a
   ON p.personId = a.personId
  AND a.city = 'NY'
 
-5. A Universal SQL JOIN Template
+---
+###5. A Universal SQL JOIN Template
+
+```sql
 SELECT
   -- final output columns
 FROM main_table t1
@@ -149,14 +151,12 @@ LEFT / INNER JOIN (
 WHERE
   -- business filters only
 
-6. Interview-Oriented Takeaways
+---
+###6. Interview-Oriented Takeaways
 
-JOINs connect tables, not columns
-
-Always identify the main table first
-
-LEFT JOIN preserves rows; WHERE can remove them
-
-Aggregation answers “what”, JOIN answers “who”
+- JOINs connect tables, not columns
+- Always identify the main table first
+- LEFT JOIN preserves rows; WHERE can remove them
+- Aggregation answers “what”, JOIN answers “who”
 
 This mental model applies to most SQL interview and real-world analytics problems.
