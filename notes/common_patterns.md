@@ -51,3 +51,112 @@ JOIN conditions almost always follow this pattern:
 
 ```sql
 tableA.id = tableB.foreignKey
+
+
+Examples:
+
+p.personId = a.personId
+
+e.managerId = m.id
+
+e.departmentId = d.id
+
+3. Common JOIN Patterns (with Examples)
+Pattern 1: Enriching a main table (LEFT JOIN)
+
+Problem type:
+“Show all entities, even if related data is missing.”
+
+Example: Combine Person and Address
+
+FROM Person p
+LEFT JOIN Address a
+  ON p.personId = a.personId
+
+
+Key idea:
+
+Person must always appear
+
+Address may be NULL
+
+Pattern 2: Self Join (table plays two roles)
+
+Problem type:
+“Compare rows within the same table.”
+
+Example: Employees earning more than their managers
+
+FROM Employee e
+JOIN Employee m
+  ON e.managerId = m.id
+
+
+Key idea:
+
+Same table, different roles
+
+Use aliases to distinguish roles
+
+Pattern 3: Group-level metric + join back
+
+Problem type:
+“Highest / lowest / top N per group.”
+
+Example: Highest salary per department
+
+Employee
+→ GROUP BY departmentId (compute metric)
+→ JOIN back to Employee
+→ JOIN Department for names
+
+
+Key idea:
+
+Aggregation alone loses row detail
+
+Join back restores employee-level rows
+
+4. JOIN vs WHERE: Division of Responsibility
+ON clause	WHERE clause
+Defines table relationships	Filters final results
+Controls how rows match	Controls which rows stay
+
+⚠️ Common pitfall:
+
+LEFT JOIN Address a
+WHERE a.city = 'NY'
+
+
+This turns the LEFT JOIN into an INNER JOIN.
+
+Correct version:
+
+LEFT JOIN Address a
+  ON p.personId = a.personId
+ AND a.city = 'NY'
+
+5. A Universal SQL JOIN Template
+SELECT
+  -- final output columns
+FROM main_table t1
+LEFT / INNER JOIN related_table t2
+  ON t1.key = t2.key
+LEFT / INNER JOIN (
+  -- aggregated subquery
+) t3
+  ON ...
+WHERE
+  -- business filters only
+
+6. Interview-Oriented Takeaways
+
+JOINs connect tables, not columns
+
+Always identify the main table first
+
+LEFT JOIN preserves rows; WHERE can remove them
+
+Aggregation answers “what”, JOIN answers “who”
+
+This mental model applies to most SQL interview and real-world analytics problems.
