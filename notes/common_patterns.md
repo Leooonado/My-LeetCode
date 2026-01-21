@@ -55,7 +55,7 @@ tableA.id = tableB.foreignKey
 ```
 ---
 
-## Examples:
+### Examples:
 
 ```sql
 p.personId = a.personId
@@ -65,7 +65,7 @@ e.departmentId = d.id
 
 ```
 
-### 3. Common JOIN Patterns (with Examples)
+## 3. Common JOIN Patterns (with Examples)
 #Pattern 1: Enriching a main table (LEFT JOIN)
 
 Problem type:
@@ -84,7 +84,7 @@ Key idea:
 - Person must always appear
 - Address may be NULL
 
-# Pattern 2: Self Join (table plays two roles)
+### Pattern 2: Self Join (table plays two roles)
 
 Problem type:
 “Compare rows within the same table.”
@@ -103,7 +103,7 @@ Key idea:
 - Same table, different roles
 - Use aliases to distinguish roles
 
-# Pattern 3: Group-level metric + join back
+### Pattern 3: Group-level metric + join back
 
 Problem type:
 “Highest / lowest / top N per group.”
@@ -121,7 +121,7 @@ Key idea:
 
 - Join back restores employee-level rows
 
-### 4. JOIN vs WHERE: Division of Responsibility
+## 4. JOIN vs WHERE: Division of Responsibility
 ON clause	WHERE clause
 Defines table relationships	Filters final results
 Controls how rows match	Controls which rows stay
@@ -144,7 +144,7 @@ LEFT JOIN Address a
 ```
 
 ---
-### 5. A Universal SQL JOIN Template
+## 5. A Universal SQL JOIN Template
 
 ```sql
 SELECT
@@ -162,7 +162,7 @@ WHERE
 ```
 
 ---
-### 6. Interview-Oriented Takeaways
+## 6. Interview-Oriented Takeaways
 
 - JOINs connect tables, not columns
 - Always identify the main table first
